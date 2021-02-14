@@ -1,7 +1,7 @@
 import React from 'react';
 import Input from '../Input';
 import Styles from './AppCard.module.scss';
-import { EditButton } from '../IconButtons';
+import { DeleteButton, EditButton } from '../IconButtons';
 import { ISettings } from '../../lib/interfaces/ISettings';
 
 interface IProps {
@@ -19,7 +19,11 @@ export default function AppCard({
   onEdit,
   process,
 }: IProps) {
-  function onClick() {
+  function onDeleteClick() {
+    // TODO: implement
+  }
+
+  function onEditClick() {
     onEdit({ location, name, process });
   }
 
@@ -40,7 +44,10 @@ export default function AppCard({
       ) : (
         <div className={Styles['app-card__label-wrapper']}>
           <span className={Styles['app-card__label']}>{name}</span>
-          <EditButton onClick={onClick} />
+          <div className={Styles['app-card__buttons']}>
+            <EditButton onClick={onEditClick} />
+            <DeleteButton onClick={onDeleteClick} />
+          </div>
         </div>
       )}
     </div>

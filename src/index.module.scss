@@ -19,5 +19,6 @@ body {
   font-variation-settings: 'ital' 1, 'wght' 750;
   font-synthesis: none;
   margin: 0;
-  -webkit-text-stroke: 2px black;
+  text-shadow: 2px 2px var(--color-darker);
+  -webkit-text-stroke: 1px var(--color-darker);
 }

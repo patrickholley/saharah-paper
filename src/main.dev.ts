@@ -71,8 +71,8 @@ const createWindow = async () => {
     show: false,
     minWidth: 800,
     width: 1200,
-    height: 900,
     minHeight: 600,
+    height: 900,
     icon: getAssetPath('icon.png'),
     webPreferences: {
       nodeIntegration: true,

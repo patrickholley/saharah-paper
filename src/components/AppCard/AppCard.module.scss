@@ -5,6 +5,10 @@
   padding: 20px;
   width: 320px;
 
+  &__buttons {
+    display: flex;
+  }
+
   &__image {
     box-shadow: 4px 4px 4px 4px var(--color-darker);
     border-radius: 5px;
@@ -18,7 +22,6 @@
     margin-right: 8px;
     overflow: hidden;
     text-overflow: ellipsis;
-    text-shadow: 2px 2px var(--color-darker);
     white-space: nowrap;
     width: 100%;
   }

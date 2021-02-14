@@ -1,4 +1,16 @@
 .home {
+  &__heading {
+    font-size: 2rem;
+    margin: 10px 0;
+    text-align: center;
+  }
+
+  &__hr {
+    border: 2px solid var(--color-darker);
+    border-radius: 2px;
+    margin: 0 20px;
+  }
+
   &__settings {
     display: flex;
     flex-wrap: wrap;

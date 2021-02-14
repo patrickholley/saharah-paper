@@ -1,5 +1,4 @@
 import { remote } from 'electron';
-import path from 'path';
 import React from 'react';
 import AppCard from '../../components/AppCard';
 import { ISettings } from '../../lib/interfaces';
@@ -8,7 +7,6 @@ import Styles from './Home.module.scss';
 
 export default function Home() {
   function handleEdit(editDetails: ISettings) {
-    /** work on this */
     const editWindow = new remote.BrowserWindow({
       show: false,
       minWidth: 400,
@@ -21,18 +19,25 @@ export default function Home() {
     });
 
     // TODO: Test in Windows
-    editWindow.loadURL(`file://${__dirname}/index.html#/edit`);
-
-    editWindow.once('ready-to-show', () => {
-      editWindow.show();
-    });
+    // eslint-disable-next-line promise/catch-or-return
+    editWindow
+      .loadURL(
+        `file://${__dirname}/index.html#/edit?${new URLSearchParams(
+          editDetails
+        ).toString()}}`
+      )
+      // eslint-disable-next-line promise/always-return
+      .then(() => {
+        editWindow.show();
+      });
   }
 
   function renderDefaultSettings() {
     return userSettings.defaults.locations.map(
       (location: string, i: number) => (
-        // eslint-disable-next-line react/jsx-key
         <AppCard
+          // eslint-disable-next-line react/no-array-index-key
+          key={i}
           location={location}
           name={`Monitor ${i + 1}`}
           onEdit={handleEdit}
@@ -56,8 +61,11 @@ export default function Home() {
   }
 
   return (
-    <div>
+    <div className={Styles.home}>
+      <h2 className={Styles.home__heading}>Monitors</h2>
       <div className={Styles.home__settings}>{renderDefaultSettings()}</div>
+      <hr className={Styles.home__hr} />
+      <h2 className={Styles.home__heading}>Applications</h2>
       <div className={Styles.home__settings}>{renderApplicationSettings()}</div>
     </div>
   );
