@@ -1,14 +1,47 @@
 import React from 'react';
-import ApplicationCard from '../../components/ApplicationCard';
+import AppCard from '../../components/AppCard';
 import userSettings from '../../userSettings.json';
-import './Home.scss';
+import Styles from './Home.scss';
 
 export default function Home() {
-  function renderDefaultSettings() {
-    return userSettings.defaults.locations.map((location: string) => (
-      <ApplicationCard key={location} location={location} />
-    ));
+  interface ISettings {
+    location: string;
+    name: string;
+    process: string;
   }
 
-  return <div>{renderDefaultSettings()}</div>;
+  function renderDefaultSettings() {
+    return userSettings.defaults.locations.map(
+      (location: string, i: number) => (
+        <AppCard
+          // eslint-disable-next-line react/no-array-index-key
+          key={i}
+          isEditing={false}
+          location={location}
+          name={`Monitor ${i + 1}`}
+        />
+      )
+    );
+  }
+
+  function renderApplicationSettings() {
+    return userSettings.applications.map(
+      ({ location, name, process }: ISettings) => (
+        <AppCard
+          key={process}
+          isEditing={false}
+          location={location}
+          name={name}
+          process={process}
+        />
+      )
+    );
+  }
+
+  return (
+    <div>
+      <div className={Styles.home__settings}>{renderDefaultSettings()}</div>
+      <div className={Styles.home__settings}>{renderApplicationSettings()}</div>
+    </div>
+  );
 }

@@ -1,0 +1,22 @@
+@font-face {
+  font-family: 'Raleway';
+  src: url('../assets/fonts/Raleway/Raleway-VariableFont_wght.ttf'),
+    url('../assets/fonts/Raleway/Raleway-Italic-VariableFont_wght.ttf');
+}
+
+:root {
+  --color-primary: rgb(175, 140, 70);
+  --color-secondary: rgb(30, 90, 180);
+  --color-light: rgb(255, 255, 255);
+  --color-dark: rgb(60, 60, 60);
+  --color-darker: rgb(30, 30, 30);
+}
+
+body {
+  background-color: var(--color-dark);
+  color: var(--color-primary);
+  font-family: 'Raleway';
+  font-variation-settings: 'ital' 1, 'wght' 750;
+  font-synthesis: none;
+  margin: 0;
+}

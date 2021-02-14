@@ -1,0 +1,33 @@
+.app-card {
+  align-items: center;
+  display: flex;
+  flex-flow: column;
+  padding: 20px;
+  width: 320px;
+
+  &__image {
+    box-shadow: 4px 4px 4px 4px var(--color-darker);
+    border-radius: 5px;
+    height: 180px;
+  }
+
+  &__label {
+    font-size: 1.5rem;
+    font-style: italic;
+    font-weight: bold;
+    margin-right: 4px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-shadow: 2px 2px var(--color-darker);
+    white-space: nowrap;
+    width: 100%;
+    -webkit-text-stroke: 2px var(--color-darker);
+  }
+
+  &__label-wrapper {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px;
+    width: 100%;
+  }
+}

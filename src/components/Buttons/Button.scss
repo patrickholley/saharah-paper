@@ -1,0 +1,23 @@
+.button {
+  background-color: var(--color-primary);
+  border: 2px solid var(--color-darker);
+  border-radius: 3px;
+  box-shadow: 2px 2px var(--color-darker);
+  padding: 0;
+  transform: translate(-1px, -1px);
+  transition: transform 0.25s, box-shadow 0.25s;
+
+  &:active {
+    transform: translate(1px, 1px);
+    box-shadow: none;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &.icon {
+    height: 30px;
+    min-width: 30px;
+  }
+}
