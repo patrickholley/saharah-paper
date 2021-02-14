@@ -1,6 +1,6 @@
 import React from 'react';
 import Input from '../Input';
-import Styles from './AppCard.scss';
+import Styles from './AppCard.module.scss';
 import { EditButton } from '../IconButtons';
 import { ISettings } from '../../lib/interfaces/ISettings';
 

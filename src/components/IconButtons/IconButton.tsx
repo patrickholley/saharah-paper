@@ -1,5 +1,5 @@
 import React from 'react';
-import Styles from './IconButton.scss';
+import Styles from './IconButton.module.scss';
 
 interface IProps {
   children: React.ReactNode;

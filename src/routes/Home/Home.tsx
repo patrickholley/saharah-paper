@@ -1,11 +1,10 @@
-import { BrowserWindow, remote } from 'electron';
+import { remote } from 'electron';
 import path from 'path';
 import React from 'react';
-import { useHistory } from 'react-router-dom';
 import AppCard from '../../components/AppCard';
 import { ISettings } from '../../lib/interfaces';
 import userSettings from '../../userSettings.json';
-import Styles from './Home.scss';
+import Styles from './Home.module.scss';
 
 export default function Home() {
   function handleEdit(editDetails: ISettings) {
@@ -21,11 +20,8 @@ export default function Home() {
       },
     });
 
-    editWindow.loadURL(
-      process.env.NODE_ENV === 'development'
-        ? `file://${__dirname}/index.html#/edit`
-        : `file://${path.join(__dirname, '../build/index.html?view=edit')}`
-    );
+    // TODO: Test in Windows
+    editWindow.loadURL(`file://${__dirname}/index.html#/edit`);
 
     editWindow.once('ready-to-show', () => {
       editWindow.show();
@@ -35,9 +31,8 @@ export default function Home() {
   function renderDefaultSettings() {
     return userSettings.defaults.locations.map(
       (location: string, i: number) => (
+        // eslint-disable-next-line react/jsx-key
         <AppCard
-          // eslint-disable-next-line react/no-array-index-key
-          key={i}
           location={location}
           name={`Monitor ${i + 1}`}
           onEdit={handleEdit}
