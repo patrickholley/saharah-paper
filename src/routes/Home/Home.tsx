@@ -1,13 +1,33 @@
+import { BrowserWindow, remote } from 'electron';
 import React from 'react';
 import AppCard from '../../components/AppCard';
 import userSettings from '../../userSettings.json';
 import Styles from './Home.scss';
 
+export interface ISettings {
+  name: string;
+  location: string;
+  process?: string;
+}
+
 export default function Home() {
-  interface ISettings {
-    location: string;
-    name: string;
-    process: string;
+  function handleEdit(editDetails: ISettings) {
+    /** work on this */
+    const editWindow = new remote.BrowserWindow({
+      show: false,
+      minWidth: 400,
+      width: 600,
+      height: 450,
+      minHeight: 300,
+      webPreferences: {
+        enableRemoteModule: true,
+        nodeIntegration: true,
+      },
+    });
+
+    editWindow.loadURL(
+      'https://stackoverflow.com/questions/37884130/electron-remote-is-undefined'
+    );
   }
 
   function renderDefaultSettings() {
@@ -16,9 +36,9 @@ export default function Home() {
         <AppCard
           // eslint-disable-next-line react/no-array-index-key
           key={i}
-          isEditing={false}
           location={location}
           name={`Monitor ${i + 1}`}
+          onEdit={handleEdit}
         />
       )
     );
@@ -29,9 +49,9 @@ export default function Home() {
       ({ location, name, process }: ISettings) => (
         <AppCard
           key={process}
-          isEditing={false}
           location={location}
           name={name}
+          onEdit={handleEdit}
           process={process}
         />
       )

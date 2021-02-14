@@ -2,15 +2,27 @@ import React from 'react';
 import Input from '../Input';
 import Styles from './AppCard.scss';
 import { EditButton } from '../IconButtons';
+import { ISettings } from '../../routes/Home/Home';
 
 interface IProps {
-  isEditing: boolean;
+  isEditing?: boolean;
   location: string;
   name: string;
+  onEdit(settings: ISettings): void;
   process?: string;
 }
 
-export default function AppCard({ isEditing, location, name }: IProps) {
+export default function AppCard({
+  isEditing,
+  location,
+  name,
+  onEdit,
+  process,
+}: IProps) {
+  function onClick() {
+    onEdit({ location, name, process });
+  }
+
   return (
     <div className={Styles['app-card']}>
       <img
@@ -28,7 +40,7 @@ export default function AppCard({ isEditing, location, name }: IProps) {
       ) : (
         <div className={Styles['app-card__label-wrapper']}>
           <span className={Styles['app-card__label']}>{name}</span>
-          <EditButton className={Styles['app-card__icon']} />
+          <EditButton onClick={onClick} />
         </div>
       )}
     </div>
@@ -36,5 +48,6 @@ export default function AppCard({ isEditing, location, name }: IProps) {
 }
 
 AppCard.defaultProps = {
+  isEditing: false,
   process: '',
 };

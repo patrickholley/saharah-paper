@@ -1,13 +1,14 @@
 import React from 'react';
-import Styles from './Button.scss';
+import Styles from './IconButton.scss';
 
 interface IProps {
   children: React.ReactNode;
+  onClick(): void;
 }
 
-export default function IconButton({ children }: IProps) {
+export default function IconButton({ children, onClick }: IProps) {
   return (
-    <button className={`${Styles.button} ${Styles.icon}`} type="button">
+    <button className={Styles['icon-button']} onClick={onClick} type="button">
       {children}
     </button>
   );
