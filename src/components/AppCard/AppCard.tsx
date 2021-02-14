@@ -2,7 +2,7 @@ import React from 'react';
 import Input from '../Input';
 import Styles from './AppCard.scss';
 import { EditButton } from '../IconButtons';
-import { ISettings } from '../../routes/Home/Home';
+import { ISettings } from '../../lib/interfaces/ISettings';
 
 interface IProps {
   isEditing?: boolean;

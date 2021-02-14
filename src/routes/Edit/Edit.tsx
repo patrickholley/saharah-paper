@@ -1,5 +1,5 @@
 import React from 'react';
 
-export default function EditWIndow() {
+export default function EditWindow() {
   return <div>Hello World!</div>;
 }

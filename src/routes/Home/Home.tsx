@@ -1,14 +1,11 @@
 import { BrowserWindow, remote } from 'electron';
+import path from 'path';
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import AppCard from '../../components/AppCard';
+import { ISettings } from '../../lib/interfaces';
 import userSettings from '../../userSettings.json';
 import Styles from './Home.scss';
-
-export interface ISettings {
-  name: string;
-  location: string;
-  process?: string;
-}
 
 export default function Home() {
   function handleEdit(editDetails: ISettings) {
@@ -20,14 +17,19 @@ export default function Home() {
       height: 450,
       minHeight: 300,
       webPreferences: {
-        enableRemoteModule: true,
         nodeIntegration: true,
       },
     });
 
     editWindow.loadURL(
-      'https://stackoverflow.com/questions/37884130/electron-remote-is-undefined'
+      process.env.NODE_ENV === 'development'
+        ? `file://${__dirname}/index.html#/edit`
+        : `file://${path.join(__dirname, '../build/index.html?view=edit')}`
     );
+
+    editWindow.once('ready-to-show', () => {
+      editWindow.show();
+    });
   }
 
   function renderDefaultSettings() {

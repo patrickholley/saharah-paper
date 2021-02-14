@@ -1,5 +1,5 @@
 import React from 'react';
-import Styles from './Input.scss';
+//  import Styles from './Input.scss';
 
 interface IProps {
   id: string;
