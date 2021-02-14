@@ -1,8 +1,9 @@
 .button {
-  background-color: var(--color-primary);
+  background-color: transparent;
   border: 2px solid var(--color-darker);
   border-radius: 3px;
   box-shadow: 2px 2px var(--color-darker);
+  cursor: pointer;
   padding: 0;
   transform: translate(-1px, -1px);
   transition: transform 0.25s, box-shadow 0.25s;
@@ -14,10 +15,5 @@
 
   &:focus {
     outline: none;
-  }
-
-  &.icon {
-    height: 30px;
-    min-width: 30px;
   }
 }
