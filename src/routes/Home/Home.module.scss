@@ -1,6 +1,23 @@
 .home {
+  &__button {
+    &--add {
+      font-size: 1.25rem;
+      margin-left: 10px;
+      padding: 5px;
+
+      svg {
+        height: 26px;
+        margin-left: 5px;
+        width: auto;
+      }
+    }
+  }
+
   &__heading {
+    align-items: center;
+    display: flex;
     font-size: 2rem;
+    justify-content: center;
     margin: 10px 0;
     text-align: center;
   }

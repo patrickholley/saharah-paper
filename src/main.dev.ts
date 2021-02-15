@@ -74,10 +74,15 @@ const createWindow = async () => {
     minHeight: 600,
     height: 900,
     icon: getAssetPath('icon.png'),
+    title: 'Saharah Paper',
     webPreferences: {
       nodeIntegration: true,
       enableRemoteModule: true,
     },
+  });
+
+  mainWindow.on('page-title-updated', (e) => {
+    e.preventDefault();
   });
 
   mainWindow.loadURL(`file://${__dirname}/index.html`);

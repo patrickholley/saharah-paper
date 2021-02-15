@@ -1,6 +1,8 @@
 import { remote } from 'electron';
 import React from 'react';
 import AppCard from '../../components/AppCard';
+import Button from '../../components/Button';
+import Icon from '../../components/Icons';
 import { ISettings } from '../../lib/interfaces';
 import userSettings from '../../userSettings.json';
 import Styles from './Home.module.scss';
@@ -13,9 +15,18 @@ export default function Home() {
       width: 600,
       height: 450,
       minHeight: 300,
+      modal: true,
+      parent: remote.getCurrentWindow(),
+      title: 'Edit Monitor Settings',
       webPreferences: {
         nodeIntegration: true,
       },
+    });
+
+    editWindow.setMenuBarVisibility(false);
+
+    editWindow.on('page-title-updated', (e) => {
+      e.preventDefault();
     });
 
     // TODO: Test in Windows
@@ -61,12 +72,18 @@ export default function Home() {
   }
 
   return (
-    <div className={Styles.home}>
+    <>
       <h2 className={Styles.home__heading}>Monitors</h2>
       <div className={Styles.home__settings}>{renderDefaultSettings()}</div>
       <hr className={Styles.home__hr} />
-      <h2 className={Styles.home__heading}>Applications</h2>
+      <h2 className={Styles.home__heading}>
+        Applications{' '}
+        <Button className={Styles['home__button--add']} onClick={() => {}}>
+          Add
+          <Icon icon="add" />
+        </Button>
+      </h2>
       <div className={Styles.home__settings}>{renderApplicationSettings()}</div>
-    </div>
+    </>
   );
 }

@@ -1,8 +1,9 @@
 import React from 'react';
 import Input from '../Input';
 import Styles from './AppCard.module.scss';
-import { DeleteButton, EditButton } from '../IconButtons';
+import Button from '../Button';
 import { ISettings } from '../../lib/interfaces/ISettings';
+import Icon from '../Icons';
 
 interface IProps {
   isEditing?: boolean;
@@ -45,8 +46,12 @@ export default function AppCard({
         <div className={Styles['app-card__label-wrapper']}>
           <span className={Styles['app-card__label']}>{name}</span>
           <div className={Styles['app-card__buttons']}>
-            <EditButton onClick={onEditClick} />
-            <DeleteButton onClick={onDeleteClick} />
+            <Button onClick={onEditClick}>
+              <Icon icon="edit" />
+            </Button>
+            <Button onClick={onDeleteClick}>
+              <Icon icon="delete" />
+            </Button>
           </div>
         </div>
       )}

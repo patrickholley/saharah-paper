@@ -1,12 +1,25 @@
-.icon-button {
+.button {
+  align-items: center;
   background-color: var(--color-primary);
   border: 2px solid var(--color-darker);
-  border-radius: 25%;
+  border-radius: 7.5px;
   box-shadow: 2px 2px var(--color-darker);
+  color: var(--color-darker);
   cursor: pointer;
-  padding: 0;
+  display: inline-flex;
+  min-height: 30px;
+  font-size: 1.05rem;
+  font-weight: bold;
+  justify-content: center;
+  padding: 3px;
   transform: translate(-1px, -1px);
-  transition: transform 0.25s, box-shadow 0.25s;
+  min-width: 30px;
+  -webkit-text-stroke: 0;
+
+  svg {
+    height: 20px;
+    width: auto;
+  }
 
   &:active {
     box-shadow: none;
@@ -18,8 +31,14 @@
   }
 
   &:hover {
+    color: var(--color-primary);
     background-color: var(--color-darker);
     border-color: var(--color-primary);
+    box-shadow: 2px 2px var(--color-primary);
+
+    &:active {
+      box-shadow: none;
+    }
 
     svg {
       fill: var(--color-darker);
