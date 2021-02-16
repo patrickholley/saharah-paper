@@ -5,6 +5,7 @@ module.exports = {
     'import/no-extraneous-dependencies': 'off',
     'react/prop-types': 'off',
     'react/require-default-props': 'off',
+    'jsx-a11y/label-has-associated-control': 'off',
   },
   parserOptions: {
     ecmaVersion: 2020,

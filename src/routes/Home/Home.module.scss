@@ -23,8 +23,10 @@
   }
 
   &__hr {
+    background-color: var(--color-primary);
     border: 2px solid var(--color-darker);
     border-radius: 2px;
+    height: 1px;
     margin: 0 20px;
   }
 

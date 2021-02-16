@@ -4,6 +4,9 @@ import Styles from './AppCard.module.scss';
 import Button from '../Button';
 import { ISettings } from '../../lib/interfaces/ISettings';
 import Icon, { IconType } from '../Icons';
+import SaveIcon from '../Icons/SaveIcon';
+import ImageIcon from '../Icons/ImageIcon';
+import CancelIcon from '../Icons/CancelIcon';
 
 interface IProps {
   isEditing?: boolean;
@@ -22,7 +25,7 @@ export default function AppCard({
   location = '',
   name = '',
   onEdit = () => {},
-  process,
+  process = '',
 }: IProps) {
   // TODO: Fix for monitor settings (i.e. shouldn't have delete button)
 
@@ -35,19 +38,46 @@ export default function AppCard({
   }
 
   return (
-    <div className={Styles['app-card']}>
-      <img
-        className={Styles['app-card__image']}
-        alt={`File location: ${location}`}
-        src={location}
-      />
-      {isEditing ? (
-        <Input
-          id="application name"
-          label="Application Name:"
-          onChange={() => {}}
-          value={name}
+    <div
+      className={`${Styles['app-card']}${
+        isEditing ? ` ${Styles['is-editing']}` : ''
+      }`}
+    >
+      <div className={Styles['app-card__image-wrapper']}>
+        <img
+          className={Styles['app-card__image']}
+          alt={`File location: ${location}`}
+          src={location}
         />
+      </div>
+      {isEditing ? (
+        <div className={Styles['app-card__edit-options']}>
+          <Input label="Application" onChange={() => {}} value={name} />
+          <Input label="Process" onChange={() => {}} value={process} />
+          <div className={Styles['app-card__edit-buttons']}>
+            <Button
+              className={`${Styles['app-card__edit-button']} ${Styles.large}`}
+              onClick={() => {}}
+            >
+              Select Image
+              <ImageIcon />
+            </Button>
+            <Button
+              className={`${Styles['app-card__edit-button']} ${Styles.small1}`}
+              onClick={() => {}}
+            >
+              Save
+              <SaveIcon />
+            </Button>
+            <Button
+              className={`${Styles['app-card__edit-button']} ${Styles.small2}`}
+              onClick={() => {}}
+            >
+              Cancel
+              <CancelIcon />
+            </Button>
+          </div>
+        </div>
       ) : (
         <div className={Styles['app-card__label-wrapper']}>
           <span className={Styles['app-card__label']}>{name}</span>

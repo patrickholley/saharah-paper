@@ -9,10 +9,35 @@
     display: flex;
   }
 
+  &__edit-button {
+    &.large {
+      grid-column: 1 / 3;
+    }
+  }
+
+  &__edit-buttons {
+    display: grid;
+    grid-template-columns: 47.5% 47.5%;
+    grid-column-gap: 5%;
+    grid-row-gap: 10px;
+  }
+
+  &__edit-options {
+    width: 80%;
+  }
+
   &__image {
     box-shadow: 4px 4px 4px 4px var(--color-darker);
     border-radius: 5px;
+    max-height: 100%;
+    max-width: 100%;
+  }
+
+  &__image-wrapper {
+    align-items: center;
+    display: flex;
     height: 180px;
+    justify-content: center;
   }
 
   &__label {
@@ -31,5 +56,16 @@
     justify-content: space-between;
     margin: 10px;
     width: 100%;
+  }
+
+  &.is-editing {
+    font-size: 1.25rem;
+    width: 480px;
+
+    .app-card {
+      &__image-wrapper {
+        height: 270px;
+      }
+    }
   }
 }

@@ -17,11 +17,10 @@ export default function Home() {
     if (isOpeningEditWindow && !prevIsOpeningEditWindow) {
       const editWindow = new remote.BrowserWindow({
         show: false,
-        minWidth: 400,
-        width: 600,
-        height: 450,
-        minHeight: 300,
+        width: 520,
+        height: 500,
         modal: true,
+        resizable: false,
         parent: remote.getCurrentWindow(),
         title: 'Edit Monitor Settings',
         webPreferences: {

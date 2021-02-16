@@ -1,18 +1,17 @@
 import React from 'react';
-//  import Styles from './Input.scss';
+import Styles from './Input.module.scss';
 
 interface IProps {
-  id: string;
   label: string;
   onChange(): void;
   value: string;
 }
 
-export default function Input({ id, label, onChange, value }: IProps) {
+export default function Input({ label, onChange, value }: IProps) {
   return (
-    <label htmlFor={id}>
+    <label className={Styles.input}>
       {label}
-      <input id={id} onChange={onChange} value={value} />
+      <input onChange={onChange} value={value} />
     </label>
   );
 }
