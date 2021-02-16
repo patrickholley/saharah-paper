@@ -8,7 +8,7 @@ interface IProps {
   value: string;
 }
 
-export default function AppCard({ id, label, onChange, value }: IProps) {
+export default function Input({ id, label, onChange, value }: IProps) {
   return (
     <label htmlFor={id}>
       {label}

@@ -3,23 +3,29 @@ import Input from '../Input';
 import Styles from './AppCard.module.scss';
 import Button from '../Button';
 import { ISettings } from '../../lib/interfaces/ISettings';
-import Icon from '../Icons';
+import Icon, { IconType } from '../Icons';
 
 interface IProps {
   isEditing?: boolean;
-  location: string;
-  name: string;
-  onEdit(settings: ISettings): void;
+  isNew?: boolean;
+  isMonitor?: boolean;
+  location?: string;
+  name?: string;
+  onEdit?(settings: ISettings): void;
   process?: string;
 }
 
 export default function AppCard({
-  isEditing,
-  location,
-  name,
-  onEdit,
+  isEditing = false,
+  isNew = false,
+  isMonitor = false,
+  location = '',
+  name = '',
+  onEdit = () => {},
   process,
 }: IProps) {
+  // TODO: Fix for monitor settings (i.e. shouldn't have delete button)
+
   function onDeleteClick() {
     // TODO: implement
   }
@@ -47,19 +53,16 @@ export default function AppCard({
           <span className={Styles['app-card__label']}>{name}</span>
           <div className={Styles['app-card__buttons']}>
             <Button onClick={onEditClick}>
-              <Icon icon="edit" />
+              <Icon iconType={IconType.EDIT} />
             </Button>
-            <Button onClick={onDeleteClick}>
-              <Icon icon="delete" />
-            </Button>
+            {!isMonitor && (
+              <Button onClick={onDeleteClick}>
+                <Icon iconType={IconType.DELETE} />
+              </Button>
+            )}
           </div>
         </div>
       )}
     </div>
   );
 }
-
-AppCard.defaultProps = {
-  isEditing: false,
-  process: '',
-};

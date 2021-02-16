@@ -1,46 +1,55 @@
 import { remote } from 'electron';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import AppCard from '../../components/AppCard';
 import Button from '../../components/Button';
-import Icon from '../../components/Icons';
+import Icon, { IconType } from '../../components/Icons';
+import usePrevious from '../../lib/hooks/usePrevious';
 import { ISettings } from '../../lib/interfaces';
-import userSettings from '../../userSettings.json';
+import userSettings from '../../../userSettings.json';
 import Styles from './Home.module.scss';
 
 export default function Home() {
-  function handleEdit(editDetails: ISettings) {
-    const editWindow = new remote.BrowserWindow({
-      show: false,
-      minWidth: 400,
-      width: 600,
-      height: 450,
-      minHeight: 300,
-      modal: true,
-      parent: remote.getCurrentWindow(),
-      title: 'Edit Monitor Settings',
-      webPreferences: {
-        nodeIntegration: true,
-      },
-    });
+  const [isOpeningEditWindow, setIsOpeningEditWindow] = useState(false);
+  const prevIsOpeningEditWindow = usePrevious(isOpeningEditWindow);
+  const [editDetails, setEditDetails] = useState({});
 
-    editWindow.setMenuBarVisibility(false);
+  useEffect(() => {
+    if (isOpeningEditWindow && !prevIsOpeningEditWindow) {
+      const editWindow = new remote.BrowserWindow({
+        show: false,
+        minWidth: 400,
+        width: 600,
+        height: 450,
+        minHeight: 300,
+        modal: true,
+        parent: remote.getCurrentWindow(),
+        title: 'Edit Monitor Settings',
+        webPreferences: {
+          nodeIntegration: true,
+        },
+      });
 
-    editWindow.on('page-title-updated', (e) => {
-      e.preventDefault();
-    });
+      editWindow.setMenuBarVisibility(false);
 
-    // TODO: Test in Windows
-    // eslint-disable-next-line promise/catch-or-return
-    editWindow
-      .loadURL(
+      editWindow.on('page-title-updated', (e) => {
+        e.preventDefault();
+      });
+
+      editWindow.show();
+      setIsOpeningEditWindow(false);
+
+      // eslint-disable-next-line promise/catch-or-return
+      editWindow.loadURL(
         `file://${__dirname}/index.html#/edit?${new URLSearchParams(
           editDetails
         ).toString()}}`
-      )
-      // eslint-disable-next-line promise/always-return
-      .then(() => {
-        editWindow.show();
-      });
+      );
+    }
+  }, [editDetails, isOpeningEditWindow, prevIsOpeningEditWindow]);
+
+  function handleEdit(details: ISettings) {
+    setEditDetails(details);
+    setIsOpeningEditWindow(true);
   }
 
   function renderDefaultSettings() {
@@ -49,6 +58,7 @@ export default function Home() {
         <AppCard
           // eslint-disable-next-line react/no-array-index-key
           key={i}
+          isMonitor
           location={location}
           name={`Monitor ${i + 1}`}
           onEdit={handleEdit}
@@ -80,7 +90,7 @@ export default function Home() {
         Applications{' '}
         <Button className={Styles['home__button--add']} onClick={() => {}}>
           Add
-          <Icon icon="add" />
+          <Icon iconType={IconType.ADD} />
         </Button>
       </h2>
       <div className={Styles.home__settings}>{renderApplicationSettings()}</div>

@@ -18,7 +18,3 @@ export default function Button({ className, children, onClick }: IProps) {
     </button>
   );
 }
-
-Button.defaultProps = {
-  className: '',
-};

@@ -3,17 +3,23 @@ import AddIcon from './AddIcon';
 import DeleteIcon from './DeleteIcon';
 import EditIcon from './EditIcon';
 
-interface IProps {
-  icon: string;
+export enum IconType {
+  ADD = 'add',
+  EDIT = 'edit',
+  DELETE = 'delete',
 }
 
-export default function Icon({ icon }: IProps) {
-  switch (icon) {
-    case 'add':
+interface IProps {
+  iconType: IconType;
+}
+
+export default function Icon({ iconType }: IProps) {
+  switch (iconType) {
+    case IconType.ADD:
       return <AddIcon />;
-    case 'edit':
+    case IconType.EDIT:
       return <EditIcon />;
-    case 'delete':
+    case IconType.DELETE:
       return <DeleteIcon />;
     default:
       return null;
