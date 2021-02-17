@@ -1,5 +1,20 @@
 .input {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
+  background-color: var(--color-darker);
+  border: 2px solid transparent;
+  border-radius: 5px;
+  color: var(--color-primary);
+  height: 30px;
+  transition: border-color 0.25s;
+  -webkit-text-stroke: 0px;
+
+  &:focus {
+    border-color: var(--color-primary);
+    outline: none;
+  }
+
+  &-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
 }

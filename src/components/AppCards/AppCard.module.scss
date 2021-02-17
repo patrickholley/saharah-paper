@@ -22,6 +22,10 @@
     grid-row-gap: 10px;
   }
 
+  &__edit-input {
+    margin: 10px 0;
+  }
+
   &__edit-options {
     width: 80%;
   }
@@ -57,15 +61,24 @@
     margin: 10px;
     width: 100%;
   }
+}
 
-  &.is-editing {
-    font-size: 1.25rem;
-    width: 480px;
+.edit-app-card {
+  font-size: 1.25rem;
+  width: 480px;
 
-    .app-card {
-      &__image-wrapper {
-        height: 270px;
-      }
+  .app-card {
+    &__image-wrapper {
+      height: 270px;
+    }
+  }
+
+  &__label--process {
+    svg {
+      cursor: help;
+      height: 16px;
+      fill: var(--color-primary);
+      stroke: var(--color-darker);
     }
   }
 }

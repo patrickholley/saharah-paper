@@ -1,17 +1,22 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import Styles from './Input.module.scss';
 
 interface IProps {
-  label: string;
+  className?: string;
+  label: string | ReactNode;
   onChange(): void;
   value: string;
 }
 
-export default function Input({ label, onChange, value }: IProps) {
+export default function Input({ className, label, onChange, value }: IProps) {
   return (
-    <label className={Styles.input}>
+    <label
+      className={`${Styles['input-wrapper']}${
+        className ? ` ${className}` : ''
+      }`}
+    >
       {label}
-      <input onChange={onChange} value={value} />
+      <input className={Styles.input} onChange={onChange} value={value} />
     </label>
   );
 }

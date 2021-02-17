@@ -1,6 +1,6 @@
 import { remote } from 'electron';
 import React, { useEffect, useState } from 'react';
-import AppCard from '../../components/AppCard';
+import { ViewAppCard } from '../../components/AppCards';
 import Button from '../../components/Button';
 import Icon, { IconType } from '../../components/Icons';
 import usePrevious from '../../lib/hooks/usePrevious';
@@ -18,7 +18,7 @@ export default function Home() {
       const editWindow = new remote.BrowserWindow({
         show: false,
         width: 520,
-        height: 500,
+        height: 570,
         modal: true,
         resizable: false,
         parent: remote.getCurrentWindow(),
@@ -54,7 +54,7 @@ export default function Home() {
   function renderDefaultSettings() {
     return userSettings.defaults.locations.map(
       (location: string, i: number) => (
-        <AppCard
+        <ViewAppCard
           // eslint-disable-next-line react/no-array-index-key
           key={i}
           isMonitor
@@ -69,7 +69,7 @@ export default function Home() {
   function renderApplicationSettings() {
     return userSettings.applications.map(
       ({ location, name, process }: ISettings) => (
-        <AppCard
+        <ViewAppCard
           key={process}
           location={location}
           name={name}

@@ -1,5 +1,5 @@
 import React from 'react';
-import AppCard from '../../components/AppCard';
+import { EditAppCard } from '../../components/AppCards';
 
 export default function Edit() {
   const params = new URLSearchParams(global.location.hash.split('?')[1]);
@@ -7,7 +7,5 @@ export default function Edit() {
   const name = params.get('name') as string;
   const process = params.get('process') as string;
 
-  return (
-    <AppCard isEditing location={location} name={name} process={process} />
-  );
+  return <EditAppCard location={location} name={name} process={process} />;
 }
