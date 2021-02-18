@@ -43,7 +43,11 @@ export default function EditAppCard({
   const ProcessLabel = () => (
     <span className={Styles['edit-app-card__label--process']}>
       Process
-      <HelpTip />
+      <HelpTip>
+        <div className={Styles['edit-app-card__help-tip--process']}>
+          Part or all of process name to identify if application is running.
+        </div>
+      </HelpTip>
     </span>
   );
 
