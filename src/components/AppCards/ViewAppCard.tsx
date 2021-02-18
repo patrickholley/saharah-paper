@@ -1,5 +1,5 @@
 import React from 'react';
-import Styles from './AppCard.module.scss';
+import Styles from './ViewAppCard.module.scss';
 import Button from '../Button';
 import { ISettings } from '../../lib/interfaces/ISettings';
 import Icon, { IconType } from '../Icons';
@@ -30,9 +30,9 @@ export default function ViewAppCard({
 
   return (
     <AppCardWrapper location={location}>
-      <div className={Styles['app-card__label-wrapper']}>
-        <span className={Styles['app-card__label']}>{name}</span>
-        <div className={Styles['app-card__buttons']}>
+      <div className={Styles['view-app-card__label-wrapper']}>
+        <span className={Styles['view-app-card__label']}>{name}</span>
+        <div className={Styles['view-app-card__buttons']}>
           <Button onClick={onEditClick}>
             <Icon iconType={IconType.EDIT} />
           </Button>

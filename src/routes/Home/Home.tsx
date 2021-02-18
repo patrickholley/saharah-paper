@@ -24,6 +24,7 @@ export default function Home() {
         parent: remote.getCurrentWindow(),
         title: 'Edit Monitor Settings',
         webPreferences: {
+          enableRemoteModule: true,
           nodeIntegration: true,
         },
       });

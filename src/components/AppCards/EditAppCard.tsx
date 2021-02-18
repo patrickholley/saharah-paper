@@ -1,7 +1,7 @@
 import React from 'react';
-import Styles from './AppCard.module.scss';
+import { remote } from 'electron';
+import Styles from './EditAppCard.module.scss';
 import Button from '../Button';
-import { ISettings } from '../../lib/interfaces/ISettings';
 import Icon, { IconType } from '../Icons';
 import AppCardWrapper from './AppCardWrapper';
 import Input from '../Input';
@@ -29,11 +29,21 @@ export default function EditAppCard({
   }
 
   function onCancelClick() {
-    // TODO: implement
+    remote.getCurrentWindow().close();
   }
 
   function onImageClick() {
-    // TODO: implement
+    remote.dialog
+      .showOpenDialog({
+        properties: ['openFile'],
+        filters: [{ name: 'Images', extensions: ['png', 'jpg', 'jpeg'] }],
+      })
+      .then(({ filePaths }) => {
+        console.log(filePaths[0]);
+      })
+      .catch((error) => {
+        throw new Error(error);
+      });
   }
 
   function onSaveClick() {
@@ -52,37 +62,41 @@ export default function EditAppCard({
   );
 
   return (
-    <AppCardWrapper className={Styles['edit-app-card']} location={location}>
-      <div className={Styles['app-card__edit-options']}>
+    <AppCardWrapper
+      className={Styles['edit-app-card']}
+      imageHeight={270}
+      location={location}
+    >
+      <div className={Styles['edit-app-card__options']}>
         <Input
-          className={Styles['app-card__edit-input']}
+          className={Styles['edit-app-card__input']}
           label="Application"
           onChange={onNameChange}
           value={name}
         />
         <Input
-          className={Styles['app-card__edit-input']}
+          className={Styles['edit-app-card__input']}
           label={<ProcessLabel />}
           onChange={onProcessChange}
           value={process}
         />
-        <div className={Styles['app-card__edit-buttons']}>
+        <div className={Styles['edit-app-card__buttons']}>
           <Button
-            className={`${Styles['app-card__edit-button']} ${Styles.large}`}
+            className={`${Styles['edit-app-card__button']} ${Styles.large}`}
             onClick={onImageClick}
           >
             Select Image
             <Icon iconType={IconType.IMAGE} />
           </Button>
           <Button
-            className={Styles['app-card__edit-button']}
+            className={Styles['edit-app-card__button']}
             onClick={onSaveClick}
           >
             Save
             <Icon iconType={IconType.SAVE} />
           </Button>
           <Button
-            className={Styles['app-card__edit-button']}
+            className={Styles['edit-app-card__button']}
             onClick={onCancelClick}
           >
             Cancel
