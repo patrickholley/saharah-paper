@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function CoffeeIcon() {
+export default function DollarIcon() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -13,11 +13,8 @@ export default function CoffeeIcon() {
       strokeLinecap="round"
       strokeLinejoin="round"
     >
-      <path d="M18 8h1a4 4 0 0 1 0 8h-1" />
-      <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z" />
-      <line x1="6" y1="1" x2="6" y2="4" />
-      <line x1="10" y1="1" x2="10" y2="4" />
-      <line x1="14" y1="1" x2="14" y2="4" />
+      <line x1="12" y1="1" x2="12" y2="23" />
+      <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
     </svg>
   );
 }

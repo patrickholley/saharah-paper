@@ -55,7 +55,7 @@ export default function EditAppCard({
       Process
       <HelpTip>
         <div className={Styles['edit-app-card__help-tip--process']}>
-          Part or all of process name to identify if application is running.
+          Part or all of process name when application is running.
         </div>
       </HelpTip>
     </span>
