@@ -28,7 +28,7 @@ build/Release
 node_modules
 
 #User settings
-userSettings*.json
+userSettings.json
 
 # OSX
 .DS_Store

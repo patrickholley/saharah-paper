@@ -6,20 +6,16 @@ import Icon, { IconType } from '../Icons';
 import AppCardWrapper from './AppCardWrapper';
 import Input from '../Input';
 import HelpTip from '../HelpTip';
-
-interface IProps {
-  isMonitor?: boolean;
-  location?: string;
-  name?: string;
-  process?: string;
-}
+import { ISettings } from '../../lib/interfaces/ISettings';
+import { saveSettings } from '../../lib/utils';
 
 export default function EditAppCard({
+  id,
   isMonitor = false,
-  location = '',
+  location,
   name = '',
   process = '',
-}: IProps) {
+}: ISettings) {
   function onNameChange() {
     // TODO: implement
   }
@@ -47,7 +43,7 @@ export default function EditAppCard({
   }
 
   function onSaveClick() {
-    // TODO: implement
+    saveSettings({ id, isMonitor, location, name, process });
   }
 
   const ProcessLabel = () => (
@@ -68,12 +64,16 @@ export default function EditAppCard({
       location={location}
     >
       <div className={Styles['edit-app-card__options']}>
-        <Input
-          className={Styles['edit-app-card__input']}
-          label="Application"
-          onChange={onNameChange}
-          value={name}
-        />
+        {!isMonitor ? (
+          <Input
+            className={Styles['edit-app-card__input']}
+            label="Application"
+            onChange={onNameChange}
+            value={name}
+          />
+        ) : (
+          <div>Monitor {id + 1}</div>
+        )}
         <Input
           className={Styles['edit-app-card__input']}
           label={<ProcessLabel />}

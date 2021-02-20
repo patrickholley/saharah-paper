@@ -5,10 +5,11 @@ import Button from '../../components/Button';
 import Icon, { IconType } from '../../components/Icons';
 import usePrevious from '../../lib/hooks/usePrevious';
 import { ISettings } from '../../lib/interfaces';
-import userSettings from '../../../userSettings.json';
+import { getSettings } from '../../lib/utils';
 import Styles from './Home.module.scss';
 
 export default function Home() {
+  const userSettings = getSettings();
   const [isOpeningEditWindow, setIsOpeningEditWindow] = useState(false);
   const prevIsOpeningEditWindow = usePrevious(isOpeningEditWindow);
   const [editDetails, setEditDetails] = useState({});
@@ -58,6 +59,7 @@ export default function Home() {
         <ViewAppCard
           // eslint-disable-next-line react/no-array-index-key
           key={i}
+          id={i}
           isMonitor
           location={location}
           name={`Monitor ${i + 1}`}
@@ -69,9 +71,10 @@ export default function Home() {
 
   function renderApplicationSettings() {
     return userSettings.applications.map(
-      ({ location, name, process }: ISettings) => (
+      ({ id, location, name, process }: ISettings) => (
         <ViewAppCard
-          key={process}
+          key={id}
+          id={id}
           location={location}
           name={name}
           onEdit={handleEdit}

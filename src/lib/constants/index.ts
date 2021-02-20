@@ -1,0 +1,1 @@
+export { userDataPath } from './filePaths';

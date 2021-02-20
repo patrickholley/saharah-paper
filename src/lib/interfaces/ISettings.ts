@@ -1,5 +1,7 @@
 export interface ISettings {
-  name: string;
+  isMonitor?: boolean;
+  id: number;
+  name?: string;
   location: string;
   process?: string;
 }

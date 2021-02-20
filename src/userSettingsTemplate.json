@@ -1,0 +1,12 @@
+{
+    "applications": [],
+    "defaults": {
+        "locations": [],
+        "primaryMonitorIndex": 0
+    },
+    "previous": {
+        "locations": [],
+    "primaryMonitorIndex": 0,
+    "monitorCount": 2
+  }
+}

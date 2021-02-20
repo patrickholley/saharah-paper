@@ -5,27 +5,24 @@ import { ISettings } from '../../lib/interfaces/ISettings';
 import Icon, { IconType } from '../Icons';
 import AppCardWrapper from './AppCardWrapper';
 
-interface IProps {
-  isMonitor?: boolean;
-  location?: string;
-  name?: string;
+interface IProps extends ISettings {
   onEdit?(settings: ISettings): void;
-  process?: string;
 }
 
 export default function ViewAppCard({
-  isMonitor = false,
-  location = '',
-  name = '',
+  id,
+  isMonitor,
+  location,
+  name,
   onEdit = () => {},
-  process = '',
+  process,
 }: IProps) {
   function onDeleteClick() {
     // TODO: implement
   }
 
   function onEditClick() {
-    onEdit({ location, name, process });
+    onEdit({ id, isMonitor, location, name, process });
   }
 
   return (
