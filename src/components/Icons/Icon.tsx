@@ -8,6 +8,7 @@ import DollarIcon from './DollarIcon';
 import EditIcon from './EditIcon';
 import HelpIcon from './HelpIcon';
 import ImageIcon from './ImageIcon';
+import MonitorIcon from './MonitorIcon';
 import SaveIcon from './SaveIcon';
 import SettingsIcon from './SettingsIcon';
 
@@ -21,6 +22,7 @@ export enum IconType {
   DOLLAR = 'dollar',
   HELP = 'help',
   IMAGE = 'image',
+  MONITOR = 'monitor',
   SAVE = 'save',
   SETTINGS = 'settings',
 }
@@ -49,6 +51,8 @@ export default function Icon({ iconType }: IProps) {
       return <HelpIcon />;
     case IconType.IMAGE:
       return <ImageIcon />;
+    case IconType.MONITOR:
+      return <MonitorIcon />;
     case IconType.SAVE:
       return <SaveIcon />;
     case IconType.SETTINGS:

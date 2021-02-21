@@ -1,18 +1,25 @@
 import React from 'react';
 import Styles from './Button.module.scss';
 
-interface IProps {
+type Props = {
   className?: string;
   children: React.ReactNode;
-  onClick(): void;
-}
+} & (
+  | { onClick(): void; isSubmit?: never }
+  | { onClick?: never; isSubmit: true }
+);
 
-export default function Button({ className, children, onClick }: IProps) {
+export default function Button({
+  className,
+  children,
+  onClick,
+  isSubmit,
+}: Props) {
   return (
     <button
       className={`${Styles.button}${className ? ` ${className}` : ''}`}
       onClick={onClick}
-      type="button"
+      type={isSubmit ? 'submit' : 'button'}
     >
       {children}
     </button>

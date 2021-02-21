@@ -3,23 +3,25 @@ import { ISetting } from '../interfaces';
 import getSettingIndexById from './getSettingIndexById';
 import saveSettings from './saveSettings';
 
-export default (setting: ISetting, isAdding = false) => {
+export default (
+  { id, isMonitor, location, name, process }: ISetting,
+  isAdding = false
+) => {
   const settings = getSettings();
-  const { isMonitor } = setting;
 
   if (isMonitor) {
-    // TODO: implement
+    settings.defaults.locations[id] = location;
   } else {
-    const applications = [...settings.applications];
+    const { applications } = settings;
 
     const settingToSave = {
-      id: setting.id,
-      location: setting.location as string,
-      name: setting.name as string,
-      process: setting.process as string,
+      id,
+      location: location as string,
+      name: name as string,
+      process: process as string,
     };
 
-    const settingIndex = getSettingIndexById(setting.id, applications);
+    const settingIndex = getSettingIndexById(id, applications);
 
     if (isAdding || settingIndex === -1) {
       if (!isAdding) {
@@ -28,11 +30,11 @@ export default (setting: ISetting, isAdding = false) => {
         );
       }
 
-      settings.applications.push(settingToSave);
+      applications.push(settingToSave);
     } else {
-      settings.applications[settingIndex] = settingToSave;
+      applications[settingIndex] = settingToSave;
     }
-
-    saveSettings(settings);
   }
+
+  saveSettings(settings);
 };

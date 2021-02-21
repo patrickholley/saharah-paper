@@ -4,7 +4,7 @@ import Styles from './Input.module.scss';
 interface IProps {
   className?: string;
   label: string | ReactNode;
-  onChange(): void;
+  onChange({ target }: { target: HTMLInputElement }): void;
   value: string;
 }
 
