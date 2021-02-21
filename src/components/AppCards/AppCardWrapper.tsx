@@ -14,15 +14,22 @@ export default function AppCardWrapper({
   imageHeight,
   location = '',
 }: IProps) {
+  function handleImageError() {}
+
   return (
-    <div className={`${Styles['app-card']}${className ? ` ${className}` : ''}`}>
+    <div
+      className={`${Styles['app-card-wrapper']}${
+        className ? ` ${className}` : ''
+      }`}
+    >
       <div
-        className={Styles['app-card__image-wrapper']}
+        className={Styles['app-card-wrapper__image-wrapper']}
         style={imageHeight ? { height: imageHeight } : {}}
       >
         <img
-          className={Styles['app-card__image']}
+          className={Styles['app-card-wrapper__image']}
           alt={`File location: ${location}`}
+          onError={handleImageError}
           src={location}
         />
       </div>

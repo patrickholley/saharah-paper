@@ -1,12 +1,13 @@
 import React from 'react';
 import Styles from './ViewAppCard.module.scss';
 import Button from '../Button';
-import { ISettings } from '../../lib/interfaces/ISettings';
+import { ISetting } from '../../lib/interfaces';
 import Icon, { IconType } from '../Icons';
 import AppCardWrapper from './AppCardWrapper';
+import removeSetting from '../../lib/utils/removeSetting';
 
-interface IProps extends ISettings {
-  onEdit?(settings: ISettings): void;
+interface IProps extends ISetting {
+  onEdit?(settings: ISetting): void;
 }
 
 export default function ViewAppCard({
@@ -17,11 +18,11 @@ export default function ViewAppCard({
   onEdit = () => {},
   process,
 }: IProps) {
-  function onDeleteClick() {
-    // TODO: implement
+  function handleDelete() {
+    removeSetting(id);
   }
 
-  function onEditClick() {
+  function handleEdit() {
     onEdit({ id, isMonitor, location, name, process });
   }
 
@@ -30,11 +31,11 @@ export default function ViewAppCard({
       <div className={Styles['view-app-card__label-wrapper']}>
         <span className={Styles['view-app-card__label']}>{name}</span>
         <div className={Styles['view-app-card__buttons']}>
-          <Button onClick={onEditClick}>
+          <Button onClick={handleEdit}>
             <Icon iconType={IconType.EDIT} />
           </Button>
           {!isMonitor && (
-            <Button onClick={onDeleteClick}>
+            <Button onClick={handleDelete}>
               <Icon iconType={IconType.DELETE} />
             </Button>
           )}

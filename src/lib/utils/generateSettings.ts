@@ -4,7 +4,7 @@ import { userDataPath } from '../constants';
 
 export default () => {
   copyFileSync(
-    path.resolve(__dirname, './userSettingsTemplate.json'),
+    path.resolve(__dirname, './settingsTemplate.json'),
     userDataPath
   );
 };

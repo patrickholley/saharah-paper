@@ -1,8 +1,9 @@
-.app-card {
+.app-card-wrapper {
   align-items: center;
   display: flex;
   flex-flow: column;
   padding: 20px;
+  position: relative;
   width: 320px;
 
   &__image {

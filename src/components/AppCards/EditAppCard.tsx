@@ -6,44 +6,51 @@ import Icon, { IconType } from '../Icons';
 import AppCardWrapper from './AppCardWrapper';
 import Input from '../Input';
 import HelpTip from '../HelpTip';
-import { ISettings } from '../../lib/interfaces/ISettings';
-import { saveSettings } from '../../lib/utils';
+import { ISetting } from '../../lib/interfaces';
+import { saveSetting } from '../../lib/utils';
+
+interface IProps extends ISetting {
+  isAdding?: boolean;
+}
 
 export default function EditAppCard({
   id,
+  isAdding = false,
   isMonitor = false,
-  location,
+  location = '',
   name = '',
   process = '',
-}: ISettings) {
-  function onNameChange() {
+}: IProps) {
+  function handleNameChange() {
     // TODO: implement
   }
 
-  function onProcessChange() {
+  function handleProcessChange() {
     // TODO: implement
   }
 
-  function onCancelClick() {
+  function handleClose() {
     remote.getCurrentWindow().close();
   }
 
-  function onImageClick() {
+  function handleSelectImage() {
     remote.dialog
       .showOpenDialog({
         properties: ['openFile'],
         filters: [{ name: 'Images', extensions: ['png', 'jpg', 'jpeg'] }],
       })
       .then(({ filePaths }) => {
-        console.log(filePaths[0]);
+        // TODO: Implement
+        // console.log(filePaths[0]);
       })
       .catch((error) => {
         throw new Error(error);
       });
   }
 
-  function onSaveClick() {
-    saveSettings({ id, isMonitor, location, name, process });
+  function handleSave() {
+    saveSetting({ id, isMonitor, location, name, process }, isAdding);
+    //handleClose();
   }
 
   const ProcessLabel = () => (
@@ -68,7 +75,7 @@ export default function EditAppCard({
           <Input
             className={Styles['edit-app-card__input']}
             label="Application"
-            onChange={onNameChange}
+            onChange={handleNameChange}
             value={name}
           />
         ) : (
@@ -77,27 +84,27 @@ export default function EditAppCard({
         <Input
           className={Styles['edit-app-card__input']}
           label={<ProcessLabel />}
-          onChange={onProcessChange}
+          onChange={handleProcessChange}
           value={process}
         />
         <div className={Styles['edit-app-card__buttons']}>
           <Button
             className={`${Styles['edit-app-card__button']} ${Styles.large}`}
-            onClick={onImageClick}
+            onClick={handleSelectImage}
           >
             Select Image
             <Icon iconType={IconType.IMAGE} />
           </Button>
           <Button
             className={Styles['edit-app-card__button']}
-            onClick={onSaveClick}
+            onClick={handleSave}
           >
             Save
             <Icon iconType={IconType.SAVE} />
           </Button>
           <Button
             className={Styles['edit-app-card__button']}
-            onClick={onCancelClick}
+            onClick={handleClose}
           >
             Cancel
             <Icon iconType={IconType.CANCEL} />

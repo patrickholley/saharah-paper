@@ -35,5 +35,14 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
+
+    &.applications {
+      justify-content: space-between;
+
+      &::after {
+        content: '';
+        flex: auto;
+      }
+    }
   }
 }

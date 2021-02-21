@@ -4,15 +4,16 @@ import { ViewAppCard } from '../../components/AppCards';
 import Button from '../../components/Button';
 import Icon, { IconType } from '../../components/Icons';
 import usePrevious from '../../lib/hooks/usePrevious';
-import { ISettings } from '../../lib/interfaces';
+import { ISetting } from '../../lib/interfaces';
 import { getSettings } from '../../lib/utils';
 import Styles from './Home.module.scss';
 
 export default function Home() {
-  const userSettings = getSettings();
+  const settings = getSettings();
+  const [isAdding, setIsAdding] = useState(false);
   const [isOpeningEditWindow, setIsOpeningEditWindow] = useState(false);
   const prevIsOpeningEditWindow = usePrevious(isOpeningEditWindow);
-  const [editDetails, setEditDetails] = useState({});
+  const [editDetails, setEditDetails] = useState<ISetting>({});
 
   useEffect(() => {
     if (isOpeningEditWindow && !prevIsOpeningEditWindow) {
@@ -23,7 +24,11 @@ export default function Home() {
         modal: true,
         resizable: false,
         parent: remote.getCurrentWindow(),
-        title: 'Edit Monitor Settings',
+        title: isAdding
+          ? 'Add Application'
+          : `Edit ${
+              editDetails.isMonitor ? 'Monitor' : 'Application'
+            } Settings`,
         webPreferences: {
           enableRemoteModule: true,
           nodeIntegration: true,
@@ -38,43 +43,48 @@ export default function Home() {
 
       editWindow.show();
       setIsOpeningEditWindow(false);
+      if (isAdding) setIsAdding(false);
 
-      // eslint-disable-next-line promise/catch-or-return
-      editWindow.loadURL(
-        `file://${__dirname}/index.html#/edit?${new URLSearchParams(
-          editDetails
-        ).toString()}}`
-      );
+      const URLPath = isAdding
+        ? '/add?' // TODO: Why is ? necessary to load path?
+        : `/edit?${new URLSearchParams(editDetails).toString()}`;
+
+      editWindow.loadURL(`file://${__dirname}/index.html#${URLPath}}`);
     }
-  }, [editDetails, isOpeningEditWindow, prevIsOpeningEditWindow]);
+  }, [editDetails, isAdding, isOpeningEditWindow, prevIsOpeningEditWindow]);
 
-  function handleEdit(details: ISettings) {
+  function handleAdd() {
+    setIsAdding(true);
+    setEditDetails({});
+    setIsOpeningEditWindow(true);
+  }
+
+  function handleEdit(details: ISetting) {
     setEditDetails(details);
     setIsOpeningEditWindow(true);
   }
 
   function renderDefaultSettings() {
-    return userSettings.defaults.locations.map(
-      (location: string, i: number) => (
-        <ViewAppCard
-          // eslint-disable-next-line react/no-array-index-key
-          key={i}
-          id={i}
-          isMonitor
-          location={location}
-          name={`Monitor ${i + 1}`}
-          onEdit={handleEdit}
-        />
-      )
-    );
+    return settings.defaults.locations.map((location: string, i: number) => (
+      <ViewAppCard
+        // eslint-disable-next-line react/no-array-index-key
+        key={i}
+        id={i}
+        isMonitor
+        location={location}
+        name={`Monitor ${i + 1}`}
+        onEdit={handleEdit}
+      />
+    ));
   }
 
   function renderApplicationSettings() {
-    return userSettings.applications.map(
-      ({ id, location, name, process }: ISettings) => (
+    return settings.applications.map(
+      ({ id, location, name, process }: ISetting) => (
         <ViewAppCard
           key={id}
           id={id}
+          isMonitor={false}
           location={location}
           name={name}
           onEdit={handleEdit}
@@ -91,12 +101,14 @@ export default function Home() {
       <hr className={Styles.home__hr} />
       <h2 className={Styles.home__heading}>
         Applications{' '}
-        <Button className={Styles['home__button--add']} onClick={() => {}}>
+        <Button className={Styles['home__button--add']} onClick={handleAdd}>
           Add
           <Icon iconType={IconType.ADD} />
         </Button>
       </h2>
-      <div className={Styles.home__settings}>{renderApplicationSettings()}</div>
+      <div className={`${Styles.home__settings} ${Styles.applications}`}>
+        {renderApplicationSettings()}
+      </div>
     </>
   );
 }

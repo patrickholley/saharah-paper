@@ -1,11 +1,17 @@
 {
     "applications": [],
     "defaults": {
-        "locations": [],
+        "locations": [
+            "",
+            ""
+        ],
         "primaryMonitorIndex": 0
     },
     "previous": {
-        "locations": [],
+        "locations": [
+            "",
+            ""
+        ],
     "primaryMonitorIndex": 0,
     "monitorCount": 2
   }
