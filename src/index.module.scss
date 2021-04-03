@@ -13,13 +13,16 @@
   --color-darker: rgb(30, 30, 30);
 }
 
-body {
+html {
   background-color: var(--color-dark);
   color: var(--color-primary);
   font-family: 'Raleway';
-  font-variation-settings: 'ital' 1, 'wght' 750;
+  font-size: 20px;
   font-synthesis: none;
+  font-weight: bold;
+  font-variation-settings: 'ital' 1, 'wght' 750;
   margin: 0;
-  text-shadow: 2px 2px var(--color-darker);
-  -webkit-text-stroke: 1px var(--color-darker);
+  text-shadow: 2px 2px var(--color-darker), -1px -1px var(--color-darker),
+    1px -1px var(--color-darker), -1px 1px var(--color-darker),
+    1px 1px var(--color-darker);
 }

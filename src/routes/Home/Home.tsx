@@ -3,24 +3,30 @@ import React, { useEffect, useState } from 'react';
 import { ViewAppCard } from '../../components/AppCards';
 import Button from '../../components/Button';
 import Icon, { IconType } from '../../components/Icons';
-import usePrevious from '../../lib/hooks/usePrevious';
-import { ISetting } from '../../lib/interfaces';
+import { usePrevious } from '../../lib/hooks';
+import { ISetting, ISettingsApp } from '../../lib/interfaces';
 import { getSettings } from '../../lib/utils';
 import Styles from './Home.module.scss';
 
 export default function Home() {
+  const emptySetting = {
+    id: -1,
+    isMonitor: false,
+    location: '',
+  };
+
   const settings = getSettings();
   const [isAdding, setIsAdding] = useState(false);
   const [isOpeningEditWindow, setIsOpeningEditWindow] = useState(false);
   const prevIsOpeningEditWindow = usePrevious(isOpeningEditWindow);
-  const [editDetails, setEditDetails] = useState<ISetting>({});
+  const [editDetails, setEditDetails] = useState<ISetting>(emptySetting);
 
   useEffect(() => {
     if (isOpeningEditWindow && !prevIsOpeningEditWindow) {
       const editWindow = new remote.BrowserWindow({
         show: false,
-        width: 520,
-        height: 570,
+        width: 550,
+        height: 600,
         modal: true,
         resizable: false,
         parent: remote.getCurrentWindow(),
@@ -47,7 +53,9 @@ export default function Home() {
 
       const URLPath = isAdding
         ? '/add?' // TODO: Why is ? necessary to load path?
-        : `/edit?${new URLSearchParams(editDetails).toString()}`;
+        : `/edit?${new URLSearchParams(
+            (editDetails as unknown) as Record<string, string>
+          ).toString()}`;
 
       editWindow.loadURL(`file://${__dirname}/index.html#${URLPath}}`);
     }
@@ -55,7 +63,7 @@ export default function Home() {
 
   function handleAdd() {
     setIsAdding(true);
-    setEditDetails({});
+    setEditDetails(emptySetting);
     setIsOpeningEditWindow(true);
   }
 
@@ -80,7 +88,7 @@ export default function Home() {
 
   function renderApplicationSettings() {
     return settings.applications.map(
-      ({ id, location, name, process }: ISetting) => (
+      ({ id, location, name, process }: ISettingsApp) => (
         <ViewAppCard
           key={id}
           id={id}

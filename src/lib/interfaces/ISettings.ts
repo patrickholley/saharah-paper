@@ -1,10 +1,11 @@
+export interface ISettingsApp {
+  id: number;
+  name: string;
+  location: string;
+  process: string;
+}
 export default interface ISettings {
-  applications: Array<{
-    id: number;
-    name: string;
-    location: string;
-    process: string;
-  }>;
+  applications: Array<ISettingsApp>;
   defaults: {
     locations: Array<string>;
     primaryMonitorIndex: number;
